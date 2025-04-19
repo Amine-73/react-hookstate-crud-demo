@@ -1,0 +1,10 @@
+.Btn-hover{
+    background-color: rgb(2, 75, 75)    ;
+    margin: 5px;
+    color: white;
+    border-radius: 10px;
+    transition: all 1ms;
+}
+.Btn-hover:hover{
+    background-color: rgb(2, 45, 55)
+}
