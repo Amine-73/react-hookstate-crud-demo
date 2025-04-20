@@ -2,22 +2,13 @@ import "./styleApForm.css";
 import { useState } from "react";
 
 export default function ApplicationForm() {
-  const [AllInput, SetAllInput] = useState({ name: "", phone: "", Age: "" });
+  const [AllInput, SetAllInput] = useState({ name: "", phone: "", Age: "",mycheck:false,salaire:""});
   function handleClick() {
     const myinput = { ...AllInput };
-    if (myinput.name.length > 10) {
-      if (myinput.phone.length > 10 && myinput.phone.length < 7) {
-        alert("number phone is incorect ,please check");
-        if (myinput.Age > 90 && myinput.Age <= 10) {
-            alert("this age not allwed");
-        }
-      }else{
-        alert("please check your name");
-      }
-      
-    } else {
-      alert("Your Inscription complited successful ,Thank you");
-    }
+    if(myinput.name.length >7 || myinput.name.length < 3)return alert(" please Check your name");
+    if(myinput.phone.length>10 ||myinput.phone.length < 7 || isNaN(myinput.phone) ) return alert("please Check your number phone ");
+    if(isNaN(myinput.Age) || myinput.Age > 90 || myinput.Age < 18 ) return alert("please Check your Age phone ");
+
   }
   return (
     <section>
@@ -57,12 +48,12 @@ export default function ApplicationForm() {
             onChange={(event) => {
               SetAllInput({ ...AllInput, phone: event.target.value });
             }}
-            type="Phone"
+            type="Phone" 
           />
         </div>
         <div className="Age">
           <label>Age :</label>
-          <input
+          <input placeholder="Age > 10 "
             value={AllInput.Age}
             onChange={(event) => {
               SetAllInput({ ...AllInput, Age: event.target.value });
@@ -70,17 +61,21 @@ export default function ApplicationForm() {
             type="number"
           />
         </div>
-        {/* <div className="checkbox">
+        <div className="checkbox">
           <label>Are you an Employee ?</label>
           <input
             style={{
               height: "18px",
             }}
             type="checkbox"
-            checked
+            onChange={(event)=>{
+                SetAllInput({...AllInput,mycheck:event.target.checked})
+            }}
           />
-        </div> */}
-        <select>
+        </div>
+        <select value={AllInput.salaire} onChange={(event)=>{
+            SetAllInput({...AllInput,salaire:event.target.value})
+        }}>
           <option>les than 500$</option>
           <option>Between 500$ and 2000$</option>
           <option>Above 2000$</option>
